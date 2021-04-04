@@ -9,11 +9,12 @@
           <input
             id="zip"
             v-model="queryZip"
+            v-mode.lazy="submitForm"
             type="text"
             name="zip"
             class="form-control form-control-lg"
             placeholder="Enter a 5 digit ZIP code"
-            @change="submitForm"
+            :change="submitForm"
           />
         </div>
         <div class="col-sm-auto">
@@ -108,9 +109,9 @@
         </div>
       </div>
     </div>
-    <div class="col-auto">
+    <!-- <div class="col-auto">
       <button type="submit" class="btn btn-primary btn-lg">Search</button>
-    </div>
+    </div> -->
   </form>
 </template>
 
@@ -175,6 +176,13 @@ export default {
       set(value) {
         this.pendingQueryParams.include_all = value;
       },
+    },
+  },
+
+  watch: {
+    value(value) {
+      console.log("zip changed");
+      this.submitForm();
     },
   },
 
